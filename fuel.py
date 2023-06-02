@@ -12,11 +12,7 @@ import itertools
 from scipy.interpolate import interp2d
 from scipy.optimize import fsolve
 
-def properties(temperature_C: list[int | float], 
-               coefficient: list[int | float], 
-               mu: int | float, 
-               h_k: int | float, 
-               s_k: int | float) -> dict[int | float]:
+def properties(temperature_C, coefficient, mu, h_k, s_k):
     
     R_const = 8.31451
     temperature_K = [round((temperature_C[i] + 273.15), 3) for i in range(len(temperature_C))]
@@ -52,17 +48,17 @@ def properties(temperature_C: list[int | float],
     return {'temperature_C': temperature_C, 'temperature_K': temperature_K, 'temperature_K': temperature_K, 'u':u, 'h':h, 's_0':s_0, 'Cp':Cp, 'Cv':Cv, 'k':k, 'R':R, 'mu':mu}
 
 @st.cache
-def gas(_H_2S: int | float,
-        _CO_2: int | float,
-        _O_2: int | float,
-        _CO: int | float,
-        _H_2: int | float,
-        _CH_2: int | float,
-        _CH_4: int | float,
-        _C_2H_4: int | float,
-        _C_2H_6: int | float,
-        _C_3H_8: int | float,
-        _C_4H_10: int | float, temperature_C:list[int | float]) -> dict[int | float]:
+def gas(_H_2S,
+        _CO_2,
+        _O_2,
+        _CO,
+        _H_2,
+        _CH_2,
+        _CH_4,
+        _C_2H_4,
+        _C_2H_6,
+        _C_3H_8,
+        _C_4H_10, temperature_C):
         
         _N_2_atm = 100-_H_2S - _CO_2 - _O_2 - _CO - _H_2 - _CH_2 - _CH_4 - _C_2H_4 - _C_2H_6 - _C_3H_8 - _C_4H_10
         temperature_K = [round((temperature_C[i]+273.15),3) for i in range(len(temperature_C))]
@@ -107,13 +103,13 @@ def gas(_H_2S: int | float,
                 'heat_of_combustion':heat_of_combustion,
                 'stoichiometric_air_flow':stoichiometric_air_flow}
 
-def table(temperature_C: list[int | float], 
-          temperature_K: list[int | float], 
-          u: list[int | float], h: list[int | float], 
-          s_0: list[int | float], 
-          Cp: list[int | float], 
-          Cv: list[int | float], 
-          k: list[int | float]):  
+def table(temperature_C, 
+          temperature_K, 
+          u, h, 
+          s_0, 
+          Cp, 
+          Cv, 
+          k):  
      
     data = pd.DataFrame({ 't':pd.Series(np.round((temperature_C),2),index=range(1,len(temperature_C)+1,1)),
                               'T':pd.Series(np.round((temperature_K),2),index=range(1,len(temperature_K)+1,1)),
@@ -128,9 +124,9 @@ def table(temperature_C: list[int | float],
                             columns=['t','T','u','h','s°','C_p','C_v','k'])
     return data
 
-def interpolate(function: list[int | float], 
-                parametr: list[int | float], 
-                x: int | float) -> int | float:
+def interpolate(function, 
+                parametr, 
+                x):
     
     parametr, residuals, rank, sv, rcond = np.polyfit(parametr, function, 18, full=True)
     function = sp.poly1d(parametr)
