@@ -83,7 +83,7 @@ if Panel == "1. - Расчет состава топлива":
 
 if Panel == "2. - Расчет схемы ГТУ":
     st.title('Расчет схемы ГТУ')
-    st.image(Image.open('B:\Postgraduate studies\ДИСЕРТАЦИЯ АСПИАРНТУРА\ProgrammGTU\SchemeGTU.png'))
+    st.image(Image.open('SchemeGTU.png'))
     select_1 = st.selectbox('Выберите тип схемы ГТУ:', ('Расчет схемы без охлаждения', 'Расчет схемы с охлаждением'))
     st.header('Ввод исходных данных схемы ГТУ')
     st.session_state.count34 = None
@@ -289,7 +289,7 @@ if Panel == "4. - Расчет параметров по ступеням":
         periodicity_ = count(counter = 'periodicity_', column = _periodicity_, name = "Частота вращения ротора, 1/c", format = "%f", ke = 'count35')
 
         if st.form_submit_button('Расчет   '):
-            st.image(Image.open('B:\Postgraduate studies\ДИСЕРТАЦИЯ АСПИАРНТУРА\ProgrammGTU\Smith_diagram.png'))
+            st.image(Image.open('Smith_diagram.png'))
             fuel = gas(_H_2S = st.session_state.H_2S_, _CO_2 = st.session_state.CO_2_, _O_2 = st.session_state.O_2_, _CO = st.session_state.CO_, _H_2 = st.session_state.H_2_, _CH_2 = st.session_state.CH_2_, _CH_4 = st.session_state.CH_4_, _C_2H_4 = st.session_state.C_2H_4_, _C_2H_6 = st.session_state.C_2H_6_, _C_3H_8 = st.session_state.C_3H_8_, _C_4H_10 = st.session_state.C_4H_10_, temperature_C = temperature_Cels)
             st.session_state.fuel = fuel
             schemegtu = scheme(fuel = st.session_state.fuel, ele_power = st.session_state.ele_power_, t_c = st.session_state.t_c_,
