@@ -212,9 +212,7 @@ def table2(arr, method):
         ax.legend([lamda_c2a_i ,q_lamda_c2a_i, PI_lamda_c2a_i, tau_lamda_c2a_i], [r'$\lambda$',r'$q(\lambda)$', r'$\pi(\lambda)$',r'$\tau(\lambda)$'], fontsize = 15, frameon=True, framealpha=True)       
     plt.show()
 
-a = pd.read_excel(
-r'B:\\Postgraduate studies\\ДИСЕРТАЦИЯ АСПИАРНТУРА\ProgrammGTU\\Smith_diagram.xlsx',
-    index_col=None, header=None,dtype={'Name': str, 'Value': float})
+a = pd.read_excel('Smith_diagram.xlsx',index_col=None, header=None,dtype={'Name': str, 'Value': float})
 l = len(a.loc[:,0])
 x1 = np.array(a.loc[:,0]).reshape(l)
 y1 = np.array(a.loc[:,1]).reshape(l)
